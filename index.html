@@ -184,15 +184,15 @@
 
 
         <div id="upload-data">
-            <h5>Try with your data</h5>
-            <p>You can analyse a video by following the instructions <a target="_blank"
+            <h5>Prueba con tu data</h5>
+            <p>Tu puedes probar usando el siguiente tutorial <a target="_blank"
                     href="https://cloud.google.com/video-intelligence-storage-trigger">here</a>.
-                Also see the script <a target="_blank"
-                    href="https://github.com/ZackAkil/video-intelligence-api-visualiser/blob/main/run_video_intelligence.py">here</a>
+                Puedes mirar tambien el script <a target="_blank"
+                    href="https://github.com/ZackAkil/video-intelligence-api-visualiser/blob/main/run_video_intelligence.py">aqui</a>
                 if you want to run all features at once.
             </p>
 
-            <p>This app <b><u>doesn't</u></b> send or store any of your video or annotation data. It just visualises
+            <p>Esta app<b><u>No</u></b> No envia ni guarda data , solo se está trabajando de manera local
                 local data files.</p>
             <div class="upload-area" ondrop="drop_video(event)" ondragover="drag_enter(event)">
                 <p>Your video</p>
@@ -205,8 +205,7 @@
         </div>
 
         <div v-if="data_misaligned" class="data-warning">
-            It looks like the json data dosn't align with the video file, are you sure you have all of the right files
-            uploaded?
+           Parece que los datos json no se alinean con el archivo de video, ¿estás seguro de que subiste todos los archivos correctos?
         </div>
 
 
