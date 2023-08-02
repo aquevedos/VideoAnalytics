@@ -162,6 +162,90 @@
 
 <body>
 
+     <div id="app" class="mdl-layout--fixed-header">
+
+        <header class="mdl-layout__header">
+            <div class="mdl-layout-icon">
+                <img class="logo" src="assets/icon.png">
+            </div>
+            <div class="mdl-layout__header-row">
+
+                <span class="mdl-layout-title">Video Intelligence API Visualiser</span>
+            </div>
+        </header>
+
+        <div id="video-conatiner">
+            <canvas id="my_canvas" width="800" height="500"></canvas>
+            <video id="video" controls autoplay></video>
+        </div>
+         
+         
+         <div id="upload-data">
+            <h5>Prueba con tu data</h5>
+            <p>Tu puedes utilizar siguiendo las siguientes instrucciones <a target="_blank"
+                    href="https://cloud.google.com/video-intelligence-storage-trigger">aquí</a>.
+                también puedes ver el script <a target="_blank"
+                    href="https://github.com//run_video_intelligence.py">aquí</a>
+               
+            </p>
+
+            <p>Esta app <b><u>NO</u></b> envia o guarda algo de tu video o anotaciones de data, solo sirve para visualizarlas de archivos locales </p>
+            <div class="upload-area" ondrop="drop_video(event)" ondragover="drag_enter(event)">
+                <p>Tu video</p>
+                <input id="video_input" type="file" accept="video/*" />
+            </div>
+            <div class="upload-area" ondrop="drop_json(event)" ondragover="drag_enter(event)">
+                <p>Tu .json</p>
+                <input id="json_input" type="file" accept="application/JSON" />
+            </div>
+        </div>
+        
+         <div v-if="data_misaligned" class="data-warning">
+          Parece que los datos json no se alinean con el archivo de video, ¿estás seguro de que subiste todos los archivos correctos?
+        </div>
+
+
+        <annotations-nav v-bind:title_ids_dict="title_ids_dict" v-bind:detected_features="detected_features"
+            v-bind:current_view="current_view" v-on:nav-clicked="set_current_view">
+        </annotations-nav>
+
+        <object-tracking-viz v-if="current_view == 'Object Tracking'" id="object_tracks" v-bind:json_data="json_data"
+            v-bind:video_info="video_info" v-on:segment-clicked="jump_video"></object-tracking-viz>
+
+        <label-detection-viz v-if="current_view == 'Label Detection'" id="label_detection" v-bind:json_data="json_data"
+            v-bind:video_info="video_info" v-on:segment-clicked="jump_video"></label-detection-viz>
+
+        <shot-detection-viz v-if="current_view == 'Shot Detection'" id="shot_detection" v-bind:json_data="json_data"
+            v-bind:video_info="video_info" v-on:shot-clicked="jump_video"></shot-detection-viz>
+
+        <speech-transcription-viz v-if="current_view == 'Speech Transcription'" id="speech_transcription"
+            v-bind:json_data="json_data" v-bind:video_info="video_info" v-on:word-clicked="jump_video">
+        </speech-transcription-viz>
+
+        <person-detection-viz v-if="current_view == 'Person Detection'" id="person_detection"
+            v-bind:json_data="json_data" v-bind:video_info="video_info" v-on:segment-clicked="jump_video">
+        </person-detection-viz>
+
+        <face-detection-viz v-if="current_view == 'Face Detection'" id="face_detection" v-bind:json_data="json_data"
+            v-bind:video_info="video_info" v-on:segment-clicked="jump_video">
+        </face-detection-viz>
+
+        <logo-recognition-viz v-if="current_view == 'Logo Recognition'" id="logo_recognition"
+            v-bind:json_data="json_data" v-bind:video_info="video_info" v-on:segment-clicked="jump_video">
+        </logo-recognition-viz>
+
+        <text-detection-viz v-if="current_view == 'Text Detection'" id="text_detection" v-bind:json_data="json_data"
+            v-bind:video_info="video_info" v-on:segment-clicked="jump_video">
+        </text-detection-viz>
+
+        <explicit-content-detection-viz v-if="current_view == 'Explicit Content Detection'"
+            id="explicit_content_detection" v-bind:json_data="json_data" v-bind:video_info="video_info"
+            v-on:shot-clicked="jump_video">
+        </explicit-content-detection-viz>
+    
+    </div>
+    
+        
 
 
 </body>
