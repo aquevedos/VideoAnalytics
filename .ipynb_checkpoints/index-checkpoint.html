@@ -162,7 +162,9 @@
 
 <body>
 
-     <div id="app" class="mdl-layout--fixed-header">
+
+
+    <div id="app" class="mdl-layout--fixed-header">
 
         <header class="mdl-layout__header">
             <div class="mdl-layout-icon">
@@ -178,30 +180,33 @@
             <canvas id="my_canvas" width="800" height="500"></canvas>
             <video id="video" controls autoplay></video>
         </div>
-         
-         
-         <div id="upload-data">
-            <h5>Prueba con tu data</h5>
-            <p>Tu puedes utilizar siguiendo las siguientes instrucciones <a target="_blank"
-                    href="https://cloud.google.com/video-intelligence-storage-trigger">aquí</a>.
-                también puedes ver el script <a target="_blank"
-                    href="https://github.com//run_video_intelligence.py">aquí</a>
-               
+
+
+
+        <div id="upload-data">
+            <h5>Try with your data</h5>
+            <p>You can analyse a video by following the instructions <a target="_blank"
+                    href="https://cloud.google.com/video-intelligence-storage-trigger">here</a>.
+                Also see the script <a target="_blank"
+                    href="https://github.com/ZackAkil/video-intelligence-api-visualiser/blob/main/run_video_intelligence.py">here</a>
+                if you want to run all features at once.
             </p>
 
-            <p>Esta app <b><u>NO</u></b> envia o guarda algo de tu video o anotaciones de data, solo sirve para visualizarlas de archivos locales </p>
+            <p>This app <b><u>doesn't</u></b> send or store any of your video or annotation data. It just visualises
+                local data files.</p>
             <div class="upload-area" ondrop="drop_video(event)" ondragover="drag_enter(event)">
-                <p>Tu video</p>
+                <p>Your video</p>
                 <input id="video_input" type="file" accept="video/*" />
             </div>
             <div class="upload-area" ondrop="drop_json(event)" ondragover="drag_enter(event)">
-                <p>Tu .json</p>
+                <p>Your .json</p>
                 <input id="json_input" type="file" accept="application/JSON" />
             </div>
         </div>
-        
-         <div v-if="data_misaligned" class="data-warning">
-          Parece que los datos json no se alinean con el archivo de video, ¿estás seguro de que subiste todos los archivos correctos?
+
+        <div v-if="data_misaligned" class="data-warning">
+            It looks like the json data dosn't align with the video file, are you sure you have all of the right files
+            uploaded?
         </div>
 
 
@@ -242,10 +247,12 @@
             id="explicit_content_detection" v-bind:json_data="json_data" v-bind:video_info="video_info"
             v-on:shot-clicked="jump_video">
         </explicit-content-detection-viz>
-    
+
     </div>
-    
-    
+
+
+
+
     <script src="utils/utils.js"></script>
 
     <script src="components/object_tracking.js"></script>
@@ -413,13 +420,13 @@
             console.log(json_data)
             app.json_data = json_data
 
-            console.log('Llaves ->>', Object.keys(json_data))
+            console.log('keys ->>', Object.keys(json_data))
             // check validity of json
             if (!('annotation_results' in json_data)) {
-                alert("❌ El formato de json no es compatible, asegúrese de configurar 'output_uri' \
-configuración al llamar a la API de Video Intelligence para que \
-envía una dirección de archivo .json a Google Cloud Storage. \
-Encuentre enlaces a ejemplos de guiones en la parte superior derecha de la pantalla.")
+                alert("❌ Format of json is not compatible, make sure you are setting the 'output_uri' \
+configuration when calling the Video Intelligence API so that it \
+outputs a .json file direction to Google Cloud Storage. \
+Find links to script examples at the top right of the screen.")
 
                 json_input.value = null
             }
@@ -485,11 +492,6 @@ Encuentre enlaces a ejemplos de guiones en la parte superior derecha de la panta
 
 
     </script>
-        
-        
-        
-        
-
 
 </body>
 
